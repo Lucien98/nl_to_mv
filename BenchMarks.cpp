@@ -8,7 +8,11 @@
 #include <boost/graph/labeled_graph.hpp>
 
 #include <stack>
+#if defined UNIX
+#include <unistd.h>
+#else
 #include <direct.h> // _getcwd
+#endif
 #include "config.hpp"
 
 /**
@@ -50,12 +54,20 @@ Graph parse(const std::string file_name, std::vector<std::string>* gates)
     std::string line, token;
     // std::vector<std::string> gates;
     Graph model;
-        char tmp[256];
+    char tmp[256];
+#if defined UNIX
+    getcwd(tmp, 256);
+#else
     _getcwd(tmp, 256);
+#endif
     std::cout << "Current working directory: " << tmp << std::endl;
     std::string dir;
     dir.assign(tmp, strlen(tmp));
+#if defined UNIX
+    filePath = dir + "/" + file_name;
+#else
     filePath = dir + "\\" + file_name;
+#endif
 
     std::ifstream description(filePath);
     //std::ifstream description;
