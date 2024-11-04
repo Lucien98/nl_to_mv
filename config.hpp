@@ -66,7 +66,7 @@ po::options_description build_argument_parser(
         ("num_ref", po::value<uint32_t>(&opt->num_ref)->default_value(4),
             "number of refreshing bits")
 
-        ("insfile", po::value<std::string>(&opt->insfile)->default_value("test/aes/aes_dom1/aes_sbox_dom1.nl"),
+        ("insfile", po::value<std::string>(&opt->insfile)->default_value("nl/aes/aes_dom1/aes_sbox_dom1.nl"),
             "Instruction list to convert. ")
 
         ("tool", po::value<std::string>(&opt->tool)->default_value("maskVerif"),
